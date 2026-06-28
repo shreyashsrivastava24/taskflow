@@ -2,6 +2,8 @@
 
 A simple, responsive task management application built with the MERN stack (MongoDB, Express, React, Node.js).
 
+[![Deploy to Render](https://render.com/images/deploy-to-render-button.svg)](https://render.com/deploy?repo=https://github.com/shreyashsrivastava24/taskflow)
+
 ## Features
 
 - Create, read, update, and delete tasks
@@ -187,35 +189,27 @@ Detailed REST API endpoint documentation with example requests and JSON payloads
 
 ## ☁️ Deployment Instructions
 
+The project is pre-configured with a Render Blueprint (`render.yaml`) to run the backend and serve the compiled frontend from a single web service.
+
 ### 1. Database (MongoDB Atlas)
 1. Register/Login at [MongoDB Atlas](https://www.mongodb.com/cloud/atlas).
 2. Create a Free Cluster (Shared) on your preferred cloud provider (e.g. AWS).
 3. Under **Database Access**, create a user with read/write privileges.
-4. Under **Network Access**, whitelist `0.0.0.0/30` to allow incoming traffic from hosting servers (or specify Render hosting subnets).
-5. Fetch the Connection String (choose "Node.js driver") and keep it handy for backend deployment.
+4. Under **Network Access**, whitelist `0.0.0.0/0` to allow incoming traffic from hosting servers.
+5. Fetch the Connection String (choose "Node.js driver") and copy it.
 
-### 2. Backend (Render)
-1. Sign up at [Render](https://render.com).
-2. Click **New +** and select **Web Service**.
-3. Connect your Git repository.
-4. Set the following build properties:
-   - **Root Directory**: `backend`
-   - **Build Command**: `npm install`
-   - **Start Command**: `node server.js`
-5. In the **Environment Variables** settings panel, add:
-   - `MONGODB_URI` = `[Your MongoDB Atlas connection URI string]`
-   - `PORT` = `10000` (Render handles port mappings dynamically, but defaults to this internally)
-   - `NODE_ENV` = `production`
-   - `CLIENT_URL` = `[Your deployed Vercel frontend URL]`
-6. Click **Deploy Web Service**. Render will assign a public URL (e.g. `https://taskflow-api.onrender.com`).
+### 2. One-Click Deploy to Render
+1. Ensure your latest changes are pushed to your GitHub repository.
+2. Click the **Deploy to Render** button below or at the top of the README.
+3. Render will prompt you for the `MONGODB_URI`. Paste the MongoDB connection string you copied in step 1.
+4. Click **Apply**. Render will automatically provision, build, and deploy the application.
 
-### 3. Frontend (Vercel)
-1. Sign up at [Vercel](https://vercel.com).
-2. Import your Git repository.
-3. Configure the following project parameters:
-   - **Root Directory**: `frontend`
-   - **Build Command**: `npm run build`
-   - **Output Directory**: `dist`
-4. Under **Environment Variables**, add:
-   - `VITE_API_URL` = `https://your-backend-render-domain.onrender.com/api`
-5. Click **Deploy**. Vercel will build, optimize static files, deploy the application, and return the live application URL.
+[![Deploy to Render](https://render.com/images/deploy-to-render-button.svg)](https://render.com/deploy?repo=https://github.com/shreyashsrivastava24/taskflow)
+
+### Alternative Manual Blueprint Setup (Render Dashboard)
+1. Go to the [Render Dashboard](https://dashboard.render.com).
+2. Click **New +** and select **Blueprint**.
+3. Connect this GitHub repository.
+4. Specify a group name and click **Next**.
+5. Input the `MONGODB_URI` environment variable when prompted.
+6. Click **Apply**.
